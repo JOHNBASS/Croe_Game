@@ -1,0 +1,6 @@
+{
+  "rules": {
+    ".read": "auth.uid === 'firebasedbtransfer'",
+    ".write": "auth.uid === 'firebasedbtransfer'"
+  }
+}

